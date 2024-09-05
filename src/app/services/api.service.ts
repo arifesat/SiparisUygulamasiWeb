@@ -51,8 +51,8 @@ export class ApiService {
   }
 
   // Product Endpoints
-  getProduct(productId: string): Observable<any> {
-    return this.http.get<Product>(`${this.apiUrl}/products/${productId}`);
+  getProduct(id: string): Observable<any> {
+    return this.http.get<Product>(`${this.apiUrl}/products/${id}`);
   }
 
   getProducts(): Observable<Product[]> {

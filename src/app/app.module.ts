@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
@@ -31,7 +31,10 @@ import { routes } from './app.routes';
     CommonModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    Location,
+    { provide: LocationStrategy, useClass: PathLocationStrategy }
+  ],
   // bootstrap: [AppComponent]
 })
 export class AppModule {}
