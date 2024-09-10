@@ -19,6 +19,7 @@ import { routes } from './app.routes';
   declarations: [
   ],
   imports: [
+    AppComponent,
     ProductFormComponent,
     ProductEditComponent,
     ProductDeleteComponent,

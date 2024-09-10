@@ -8,7 +8,7 @@ import { Product } from '../models/product.model';
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = 'http://localhost:7013/api'; // Update with your actual API URL
+  private apiUrl = 'https://localhost:7013/api'; // Update with your actual API URL
 
   constructor(private http: HttpClient) {}
 
@@ -52,11 +52,11 @@ export class ApiService {
 
   // Product Endpoints
   getProduct(id: string): Observable<any> {
-    return this.http.get<Product>(`${this.apiUrl}/products/${id}`);
+    return this.http.get<Product>(`${this.apiUrl}/Product/${id}`);
   }
 
   getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.apiUrl}/products`);
+    return this.http.get<Product[]>(`${this.apiUrl}/Products`);
   }
 
   createProduct(product: any): Observable<any> {

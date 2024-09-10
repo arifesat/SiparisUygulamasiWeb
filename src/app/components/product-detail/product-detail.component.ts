@@ -29,8 +29,10 @@ export class ProductDetailComponent implements OnInit {
 
   getProduct(): void {
     const id = this.route.snapshot.paramMap.get('productId');
+    console.log('Route parameter productId:', id);
+    
     if (id !== null) {
-      const productId = +id; // Convert id to number
+      const productId = id; // Convert id to number
       console.log('Fetching product with id:', productId); // Debugging log
       this.productService.getProduct(id).subscribe({
         next: (product) => {

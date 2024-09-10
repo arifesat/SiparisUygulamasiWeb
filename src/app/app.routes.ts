@@ -8,11 +8,11 @@ import { ProductFormComponent } from './components/product-form/product-form.com
 
 export const routes: Routes = [
   { path: '', component: ProductListComponent },
-  { path: 'product/:id', component: ProductDetailComponent },
-  { path: 'products', component: ProductListComponent },
-  { path: 'cart', component: CartComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'add-product', component: ProductFormComponent },
+  { path: 'Product/:productId', component: ProductDetailComponent },
+  { path: 'Products', component: ProductListComponent },
+  { path: 'Cart', component: CartComponent },
+  { path: 'Login', component: LoginComponent },
+  { path: 'AddProduct', component: ProductFormComponent },
 ];
 
 @NgModule({

@@ -17,14 +17,6 @@ export class ProductListComponent {
   constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
-    // this.apiService.getProduct('productId').subscribe({
-    //   next: data => {
-    //     this.products = data;
-    //   },
-    //   error: error => {
-    //     console.error('Error fetching products:', error);
-    //   }
-    // });
     this.apiService.getProducts().subscribe({
       next: (products) => {
         this.products = products;
