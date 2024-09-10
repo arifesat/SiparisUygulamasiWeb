@@ -23,9 +23,13 @@ export class LoginComponent {
     this.authService.login(this.credentials.username, this.credentials.password).subscribe({
       next: (response) => {
         console.log('Login successful:', response);
-        // Handle login success, like storing the auth token and redirecting
-        localStorage.setItem('authToken', response.AuthToken);
-        window.location.href = '/home';
+        if (response.authToken) {
+            localStorage.setItem('authToken', response.authToken);
+            window.location.href = '/';
+            console.log('AuthToken stored:', response.authToken);
+        } else {
+            console.error('AuthToken is empty');
+        }
       },
       error: (error) => {
         console.error('Login failed:', error);
@@ -34,14 +38,14 @@ export class LoginComponent {
   }
 
   logoutUser(): void {
-    this.apiService.logoutUser().subscribe(
-      response => {
+    this.apiService.logoutUser().subscribe({
+      next: response => {
         console.log('Logout successful:', response);
         // Handle logout, like clearing stored auth token
       },
-      error => {
+      error: error => {
         console.error('Logout failed:', error);
       }
-    );
+  });
   }
 }

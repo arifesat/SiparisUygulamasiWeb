@@ -1,6 +1,6 @@
 export interface LoginResponse {
     AuthenticateResult: boolean;
-    AuthToken: string;
+    authToken: string;
     AccessTokenExpireDate: Date;
     Admin: String;
 }
