@@ -2,19 +2,21 @@ export interface Order {
     id: string;
     userId: string;
     items: OrderItem[];
-    orderDate: string;
+    orderDate: Date;
     totalAmount: number;
     address: Address;
   }
   
   export interface OrderItem {
     productId: string;
-    productName: string;
+    product: string;
     quantity: number;
     price: number;
   }
   
   export interface Address {
+    id: string;
+    userId: string;
     street: string;
     buildingNo: string;
     doorNo: string;
