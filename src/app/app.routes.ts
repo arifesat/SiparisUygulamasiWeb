@@ -5,11 +5,12 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { CartComponent } from './components/cart/cart.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProductFormComponent } from './components/product-form/product-form.component';
+import { OrdersComponent } from './components/order/order.component';
 
 export const routes: Routes = [
   { path: '', component: ProductListComponent },
   { path: 'Product/:productId', component: ProductDetailComponent },
-  { path: 'Products', component: ProductListComponent },
+  { path: 'Order', component: OrdersComponent },
   { path: 'Cart', component: CartComponent },
   { path: 'Login', component: LoginComponent },
   { path: 'AddProduct', component: ProductFormComponent },

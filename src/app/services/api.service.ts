@@ -35,7 +35,7 @@ export class ApiService {
   }
 
   getOrdersByUserId(userId: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/order/user/${userId}`);
+    return this.http.get(`${this.apiUrl}/Order/user/${userId}`);
   }
 
   createOrder(order: any): Observable<any> {

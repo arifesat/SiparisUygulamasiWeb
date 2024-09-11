@@ -12,6 +12,7 @@ import { ProductEditComponent } from './components/product-edit/product-edit.com
 import { ProductDeleteComponent } from './components/product-delete/product-delete.component';
 import { CartComponent } from './components/cart/cart.component';
 import { LoginComponent } from './components/login/login.component';
+import { OrdersComponent } from './components/order/order.component';
 
 import { routes } from './app.routes';
 
@@ -19,6 +20,7 @@ import { routes } from './app.routes';
   declarations: [
   ],
   imports: [
+    OrdersComponent,
     AppComponent,
     ProductFormComponent,
     ProductEditComponent,
