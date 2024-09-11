@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { ApiService } from '../../services/api.service';
-import { CurrencyPipe } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CartService } from '../../services/cart.service';
+import { Cart } from '../../models/cart.model';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-cart',
@@ -10,20 +11,41 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   styleUrls: ['./cart.component.scss']
 })
-export class CartComponent {
-  userId: string = 'user-id-here'; // Replace with the actual user ID
-  productId: string = 'product-id-here'; // Replace with the actual product ID
-  quantity: number = 1;
+export class CartComponent implements OnInit {
+  cart: Cart | null = null;
+  productId: string = ''; // Add appropriate initialization
+  quantity: number = 1; // Add appropriate initialization
+  userId: string | null = null;
 
-  cart: any = { items: [] };
+  constructor(private cartService: CartService, private apiService: ApiService) {}
 
-  constructor(private apiService: ApiService) {}
+  ngOnInit(): void {
+    this.loadCart();
+  }
+
+  loadCart(): void {
+    this.cartService.getUserCart().subscribe({
+      next: (cart) => {
+        this.cart = cart;
+        this.userId = cart.userId; // Store the userId for later use
+        console.log('Cart fetched successfully:', cart);
+      },
+      error: (err) => {
+        console.error('Error fetching cart:', err);
+      }
+    });
+  }
 
   addItemToCart(): void {
-    const item = { ProductId: this.productId, Quantity: this.quantity };
-    this.apiService.addItemToCart(this.userId, item).subscribe({
+    if (!this.userId) {
+      console.error('User ID not found');
+      return;
+    }
+    const item = { productId: this.productId, quantity: this.quantity };
+    this.cartService.addItemToCart(this.userId, item).subscribe({
       next: response => {
         console.log('Item added to cart:', response);
+        this.loadCart(); // Reload the cart to reflect changes
       },
       error: error => {
         console.error('Error adding item to cart:', error);
@@ -32,9 +54,14 @@ export class CartComponent {
   }
 
   removeItemFromCart(productId: string): void {
-    this.apiService.removeItemFromCart(this.userId, productId).subscribe({
+    if (!this.userId) {
+      console.error('User ID not found');
+      return;
+    }
+    this.cartService.removeItemFromCart(this.userId, productId).subscribe({
       next: response => {
         console.log('Item removed from cart:', response);
+        this.loadCart(); // Reload the cart to reflect changes
       },
       error: error => {
         console.error('Error removing item from cart:', error);
@@ -43,9 +70,14 @@ export class CartComponent {
   }
 
   clearCart(): void {
-    this.apiService.clearCart(this.userId).subscribe({
+    if (!this.userId) {
+      console.error('User ID not found');
+      return;
+    }
+    this.cartService.clearCart(this.userId).subscribe({
       next: response => {
         console.log('Cart cleared:', response);
+        this.loadCart(); // Reload the cart to reflect changes
       },
       error: error => {
         console.error('Error clearing cart:', error);
